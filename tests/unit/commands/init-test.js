@@ -12,10 +12,11 @@ var InitCommand;
 describe('init command', function() {
   var ui;
   var analytics;
-
+  var project;
   beforeEach(function() {
     ui = new MockUI();
     analytics = new MockAnalytics();
+    project = {pkg: { name: 'some-random-name'}};
     InitCommand = rewire('../../../lib/commands/init');
     InitCommand.__set__('path', stubPath('test'));
   });
@@ -24,15 +25,18 @@ describe('init command', function() {
     assert.throw(function() {
       new InitCommand({
         ui: ui,
-        analytics: analytics
+        analytics: analytics,
+        project: project,
+        tasks: {}
       }).validateAndRun([]);
     }, undefined);
   });
 
   it('Uses the name of the closest project to when calling installBlueprint', function() {
-
-    var env = {
-      project: {pkg: { name: 'some-random-name'}},
+    var command = new InitCommand({
+      ui: ui,
+      analytics: analytics,
+      project: project,
       tasks: {
         installBlueprint: {
           run: function(ui, blueprintOpts) {
@@ -41,17 +45,19 @@ describe('init command', function() {
           }
         }
       }
-    };
+    });
 
-    return command.run(env, {})
+    return command.validateAndRun([])
       .catch(function(reason) {
         assert.equal(reason, 'Called run');
       });
-
   });
 
   it('Uses process.cwd if no package is found when calling installBlueprint', function() {
-    var env = {
+    var command = new InitCommand({
+      ui: ui,
+      analytics: analytics,
+      project: project,
       tasks: {
         installBlueprint: {
           run: function(ui, blueprintOpts) {
@@ -60,9 +66,9 @@ describe('init command', function() {
           }
         }
       }
-    };
+    });
 
-    return command.run(env, {})
+    return command.validateAndRun([])
       .catch(function(reason) {
         assert.equal(reason, 'Called run');
       });

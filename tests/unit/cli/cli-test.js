@@ -325,7 +325,6 @@ describe('Unit: CLI', function() {
 
   it('ember <invalid command>', function() {
     var help = stubCommand('help');
-
     return ember(['unknownCommand']).then(function() {
       var output = ui.output.trim().split('\n');
       assert(/The specified command .*unknownCommand.* is invalid/.test(output[1]), 'expected an invalid command message');
