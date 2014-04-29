@@ -1,7 +1,17 @@
 # ember-cli Changelog
 
+* [ENHANCEMENT] Remove `Ember.setupForTesting` and
+  `Router.reopen({location: 'none'});` from test helpers [#516].
+
+### 0.0.25
+
+* [BUGFIX] The blueprinted application's `package.json` forces an older version of `ember-cli`. Fixed in [#518](https://github.com/stefanpenner/ember-cli/pull/518).
+
 ### 0.0.24
 
+* Changes to `index.html`: Script tags were moved into body, `ENV` and the app are now defined in the same script tag.
+* introduce NULL Project, to gracefully handle out-of-project
+  invocations of the cli. Like new/init [fixes #502]
 * pre 1.0.0 dependency are now locked down to exact versions, post 1.0.0 deps are in good faith semver locked.
 * patch to quickfix some broccoli + Windows IO issues. We expect a proper solution soon, but this will hold us over (#493)[https://github.com/stefanpenner/ember-cli/pull/493]
 * Add a custom watcher to make broccoli more usable on windows by catching file errors ([493](https://github.com/stefanpenner/ember-cli/pull/493)).
@@ -35,6 +45,7 @@
 * Added `ember test --server` to run the `testem` command line server. `ember test --server` will automatically re-run your tests after a rebuild. [#474](https://github.com/stefanpenner/ember-cli/pull/474)
 * Add JSHinting for `app/` and `test/` trees when building in development. This generates console logs as well as QUnit tests (so that `ember test` shows failures). [#482](https://github.com/stefanpenner/ember-cli/pull/482)
 * Use the name specified in `package.json` while doing `ember init`. This allows you to use a different application name than your folder name. [#491](https://github.com/stefanpenner/ember-cli/pull/491)
+* Allow disabling live reload via `ember server --live-reload=false`. [#510](https://github.com/stefanpenner/ember-cli/pull/510)
 
 ### 0.0.23
 
