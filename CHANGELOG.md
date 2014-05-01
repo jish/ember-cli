@@ -1,7 +1,15 @@
 # ember-cli Changelog
 
+* [FEATURE] Added support for ember-scripts preprocessing.
+
+* [ENHANCEMENT] Refactor `blueprint.js` to remove unnecessary variable assignment, change double iteration to simple reduce, and remove function that only swapped arguments and called through. [#537]
+
+* [ENHANCEMENT] Refactor `test-loader.js` for readability and to prevent unnecessary iterations [#524]
 * [ENHANCEMENT] Remove `Ember.setupForTesting` and
   `Router.reopen({location: 'none'});` from test helpers [#516].
+* [ENHANCEMENT] Update loom-generators-ember-appkit to `^1.1.1`.
+* [BUGFIX] Whitelist `ic-ajax` exports to prevent import validation warnings. [#533](https://github.com/stefanpenner/ember-cli/pull/533)
+* [ENHANCEMENT] Call `bower install` after `npm install` in a blueprinted application.
 
 ### 0.0.25
 
