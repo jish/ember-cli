@@ -43,8 +43,10 @@ describe('cli/lookup-command.js', function() {
   });
 
   it('lookupCommand() should return UnknownCommand object when command name is not present.', function() {
-    var command = lookupCommand(commands, 'something-else');
-    command.ui = ui;
+    var Command = lookupCommand(commands, 'something-else');
+    var command = new Command({
+      ui: ui
+    });
     command.validateAndRun([]);
     expect(output.shift()).to.match(/command.*something-else.*is invalid/);
   });
