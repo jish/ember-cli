@@ -7,6 +7,7 @@ var MockAnalytics   = require('../../helpers/mock-analytics');
 var rewire          = require('rewire');
 var stubPath        = require('../../helpers/stub').stubPath;
 var Promise  = require('../../../lib/ext/promise');
+var Task  = require('../../../lib/models/task');
 var InitCommand;
 
 describe('init command', function() {
@@ -38,12 +39,12 @@ describe('init command', function() {
       analytics: analytics,
       project: project,
       tasks: {
-        installBlueprint: {
+        installBlueprint: Task.extend({
           run: function(ui, blueprintOpts) {
             assert.equal(blueprintOpts.rawName, 'some-random-name');
             return Promise.reject('Called run');
           }
-        }
+        })
       }
     });
 
@@ -59,12 +60,12 @@ describe('init command', function() {
       analytics: analytics,
       project: project,
       tasks: {
-        installBlueprint: {
+        installBlueprint: Task.extend({
           run: function(ui, blueprintOpts) {
             assert.equal(blueprintOpts.rawName, path.basename(process.cwd()));
             return Promise.reject('Called run');
           }
-        }
+        })
       }
     });
 
